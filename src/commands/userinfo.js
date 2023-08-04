@@ -7,8 +7,6 @@ module.exports = {
         .addUserOption(option => option.setName('user').setDescription('The user to show info about')),
     async execute(interaction) {
         const user = interaction.options.getUser('user') || interaction.user;
-        // add a custom guild id to the bot
-        const nitrobadge = '<:nitro:1136174881856294922>'
         const embed = new EmbedBuilder()
             .setTitle('Everything we know about this ' + (user.bot ? 'bot' : 'user') + '!')
             .setThumbnail(user.displayAvatarURL({ dynamic: true }))
@@ -25,7 +23,6 @@ module.exports = {
             const user = interaction.options.getUser('user') || interaction.user;
             const member = await interaction.guild.members.fetch(user.id);
             const tag = user.tag;
-            // if the user has the nitro badge
             const badgelistofuser = []
 
             if (user.flags.toArray().includes('ActiveDeveloper')) {
@@ -50,7 +47,6 @@ module.exports = {
             embed.addFields({ name: "Joined Discord", value: `<t:${parseInt(user.createdAt / 1000)}:R>`, inline: true})
             embed.setFooter({ text: `ID: ${user.id}` })
             embed.setTimestamp()
-            // get the user flags
             console.log(user.flags.toArray())
         }
         await interaction.channel.send({ embeds: [embed] });
